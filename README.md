@@ -3,6 +3,8 @@
 ### Setup
 Run Postgres and RabbitMQ
 ```shell
+sudo docker network create some-network
+
 sudo docker run -it --rm --network some-network -p5432:5432 --name some-postgres -e POSTGRES_PASSWORD=mysecretpasswor postgres:10
 
 # create notesDB
@@ -12,6 +14,14 @@ sudo docker run -it --rm --network some-network postgres:10 psql -h some-postgre
 
 
 sudo docker run  --hostname my-rabbit --name some-rabbit -p5672:5672 rabbitmq:3 
+```
+
+### Run the application
+```shell
+# compile
+mvn clean install 
+
+java -jar target/spring-postgres-mq-0.0.1-SNAPSHOT.jar
 ```
 
 ### Usage
